@@ -1,8 +1,8 @@
-import { PuzzleSquare } from "../components/PuzzleSquare/PuzzleSquare";
+import { PuzzleCell } from "../components/PuzzleCell/PuzzleCell";
 
 const meta = {
   title: "Square",
-  component: PuzzleSquare,
+  component: PuzzleCell,
 };
 
 export default meta;

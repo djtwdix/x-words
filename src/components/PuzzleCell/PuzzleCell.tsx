@@ -1,6 +1,6 @@
-import "./PuzzleSquare.css";
+import "./PuzzleCell.css";
 
-export interface PuzzleSquareProps {
+export interface PuzzleCellProps {
   selected?: boolean;
   highlighted?: boolean;
   letter?: string;
@@ -10,7 +10,7 @@ export interface PuzzleSquareProps {
   autoCheck?: boolean;
 }
 
-export const PuzzleSquare = ({
+export const PuzzleCell = ({
   selected,
   letter,
   answer,
@@ -18,7 +18,7 @@ export const PuzzleSquare = ({
   clueNumber,
   autoCheck,
   blank,
-}: PuzzleSquareProps) => {
+}: PuzzleCellProps) => {
   let className = "square";
   if (highlighted) className += " highlighted";
   if (selected) className += " selected";
