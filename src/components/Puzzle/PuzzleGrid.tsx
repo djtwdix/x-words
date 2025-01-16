@@ -7,9 +7,10 @@ type Orientation = "across" | "down";
 
 export interface PuzzleGridProps {
   puzzleData: PuzzleData;
+  autoCheck: boolean;
 }
 
-export const PuzzleGrid = ({ puzzleData }: PuzzleGridProps) => {
+export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedClue, setSelectedClue] = useState<number | undefined>(0);
   const [orientation, setOrientation] = useState("across");
@@ -73,7 +74,7 @@ export const PuzzleGrid = ({ puzzleData }: PuzzleGridProps) => {
             answer={cellData.letter}
             blank={!cellData.letter}
             selected={selectedIndex === index}
-            autoCheck={true}
+            autoCheck={autoCheck}
             highlighted={
               cellData.clues?.[orientation as Orientation] === selectedClue
             }

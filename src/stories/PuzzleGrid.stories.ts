@@ -8,8 +8,15 @@ const meta = {
 
 export default meta;
 
-export const Primary = {
+export const Default = {
   args: {
     puzzleData,
+  },
+};
+
+export const WithAutoCheck = {
+  args: {
+    puzzleData,
+    autoCheck: true,
   },
 };
