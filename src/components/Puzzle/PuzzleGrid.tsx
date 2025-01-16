@@ -16,12 +16,18 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
   const [orientation, setOrientation] = useState("across");
   const [puzzleGrid, setPuzzleGrid] = useState(puzzleData.grid);
 
+  //helper function that flips the orientation state
+  const changeOrientation = () => {
+    setOrientation((prev) => (prev === "across" ? "down" : "across"));
+  };
+
   const handleCellClick = (index: number, clickCount: number) => {
     setSelectedIndex(index);
 
-    if (clickCount > 1)
-      setOrientation((prev) => (prev === "across" ? "down" : "across"));
+    if (clickCount > 1) changeOrientation();
   };
+
+  useEffect(() => {});
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -29,6 +35,8 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
       puzzleGrid.map((cellData, index) => {
         const isSelectedCell = index === selectedIndex;
         if (!isSelectedCell) return;
+
+        //if alphabet key is pressed set it as guess for the cell
         if (alpha.includes(e.key)) {
           cellData.guess = e.key.toUpperCase();
           const newIndex =
@@ -39,6 +47,7 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
           setSelectedIndex(newIndex);
         }
 
+        //handle arrow navigation and delete
         switch (e.key) {
           case "Backspace":
             cellData.guess = "";
@@ -55,30 +64,28 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
           case "ArrowUp":
             setSelectedIndex(selectedIndex - puzzleData.size.cols);
             break;
+          case "Enter":
+            changeOrientation();
+            break;
         }
-        /* 
-        if (e.key === "Backspace") 
-
-        if (e.key === "ArrowLeft") setSelectedIndex(selectedIndex - 1);
-
-        if (e.key === ) */
       });
 
       setPuzzleGrid([...puzzleGrid]);
     };
 
+    //if selected cell is blank move to the next one
+    if (!puzzleGrid[selectedIndex].letter) setSelectedIndex(selectedIndex + 1);
+
     document.addEventListener("keydown", handleKeyPress);
+
+    setSelectedClue(
+      puzzleGrid[selectedIndex]?.clues?.[orientation as Orientation]
+    );
 
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  });
-
-  useEffect(() => {
-    setSelectedClue(
-      puzzleGrid[selectedIndex]?.clues?.[orientation as Orientation]
-    );
-  }, [selectedIndex, orientation]);
+  }, [puzzleGrid, selectedIndex, orientation]);
 
   return (
     <div className="puzzleGrid" style={{ maxWidth: puzzleData.size.rows * 75 }}>
