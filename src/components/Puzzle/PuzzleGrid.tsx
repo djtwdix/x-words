@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { PuzzleCell } from "../PuzzleCell/PuzzleCell";
-import { puzzleData } from "./puzzleData";
+import { PuzzleData } from "../../puzzleData";
 import "./PuzzleGrid.css";
 
 type Orientation = "across" | "down";
 
-export const PuzzleGrid = () => {
+export interface PuzzleGridProps {
+  puzzleData: PuzzleData;
+}
+
+export const PuzzleGrid = ({ puzzleData }: PuzzleGridProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedClue, setSelectedClue] = useState<number | undefined>(0);
   const [orientation, setOrientation] = useState("across");

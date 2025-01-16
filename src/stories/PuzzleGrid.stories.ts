@@ -1,4 +1,5 @@
 import { PuzzleGrid } from "../components/Puzzle/PuzzleGrid";
+import { puzzleData } from "../puzzleData";
 
 const meta = {
   title: "PuzzleGrid",
@@ -7,4 +8,8 @@ const meta = {
 
 export default meta;
 
-export const Primary = {};
+export const Primary = {
+  args: {
+    puzzleData,
+  },
+};
