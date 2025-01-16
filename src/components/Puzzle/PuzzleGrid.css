@@ -3,3 +3,7 @@
   flex-wrap: wrap;
   border: 1px solid gray;
 }
+
+.puzzleGrid:focus {
+  outline: none;
+}
