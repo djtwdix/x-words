@@ -4,7 +4,7 @@ export interface PuzzleCellProps {
   handleCellClick: (index: number, clickCount: number) => void;
   selected?: boolean;
   highlighted?: boolean;
-  letter?: string;
+  guess?: string;
   answer?: string | null;
   blank?: boolean;
   clueNumber?: number;
@@ -16,7 +16,7 @@ export const PuzzleCell = ({
   handleCellClick,
   index,
   selected,
-  letter,
+  guess,
   answer,
   highlighted,
   clueNumber,
@@ -26,10 +26,10 @@ export const PuzzleCell = ({
   let className = "square";
   if (highlighted) className += " highlighted";
   if (selected) className += " selected";
-  if (autoCheck && letter === answer) className += " autoCheckCorrect";
+  if (autoCheck && guess === answer) className += " autoCheckCorrect";
   if (blank) className += " blank";
 
-  const autoCheckWrong = autoCheck && letter && letter !== answer;
+  const autoCheckWrong = autoCheck && guess && guess !== answer;
 
   return (
     <div
@@ -39,7 +39,7 @@ export const PuzzleCell = ({
       }}
     >
       <h6 className="clueNumber">{clueNumber}</h6>
-      <h2 className="letter">{letter}</h2>
+      <h2 className="guess">{guess}</h2>
       {autoCheckWrong && <div className="autoCheckWrong"></div>}
     </div>
   );
