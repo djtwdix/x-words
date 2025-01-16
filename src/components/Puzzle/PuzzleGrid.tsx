@@ -33,25 +33,44 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
           cellData.guess = e.key.toUpperCase();
           const newIndex =
             orientation === "down"
-              ? selectedIndex + puzzleData.size.rows
+              ? selectedIndex + puzzleData.size.cols
               : selectedIndex + 1;
 
           setSelectedIndex(newIndex);
         }
 
-        if (e.key === "Backspace") {
-          cellData.guess = "";
-          return;
+        switch (e.key) {
+          case "Backspace":
+            cellData.guess = "";
+            break;
+          case "ArrowLeft":
+            setSelectedIndex(selectedIndex - 1);
+            break;
+          case "ArrowRight":
+            setSelectedIndex(selectedIndex + 1);
+            break;
+          case "ArrowDown":
+            setSelectedIndex(selectedIndex + puzzleData.size.cols);
+            break;
+          case "ArrowUp":
+            setSelectedIndex(selectedIndex - puzzleData.size.cols);
+            break;
         }
+        /* 
+        if (e.key === "Backspace") 
+
+        if (e.key === "ArrowLeft") setSelectedIndex(selectedIndex - 1);
+
+        if (e.key === ) */
       });
 
       setPuzzleGrid([...puzzleGrid]);
     };
 
-    document.addEventListener("keypress", handleKeyPress);
+    document.addEventListener("keydown", handleKeyPress);
 
     return () => {
-      document.removeEventListener("keypress", handleKeyPress);
+      document.removeEventListener("keydown", handleKeyPress);
     };
   });
 
@@ -68,7 +87,7 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
           <PuzzleCell
             index={index}
             key={index}
-            letter={cellData.guess}
+            guess={cellData.guess}
             handleCellClick={handleCellClick}
             clueNumber={cellData.clueNumber}
             answer={cellData.letter}
