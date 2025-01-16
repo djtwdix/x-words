@@ -10,6 +10,7 @@ export interface PuzzleCellProps {
   clueNumber?: number;
   autoCheck?: boolean;
   index: number;
+  inListView: boolean;
 }
 
 export const PuzzleCell = ({
@@ -21,10 +22,11 @@ export const PuzzleCell = ({
   highlighted,
   clueNumber,
   autoCheck,
+  inListView,
   blank,
 }: PuzzleCellProps) => {
   let className = "square";
-  if (highlighted) className += " highlighted";
+  if (highlighted && !inListView) className += " highlighted";
   if (selected) className += " selected";
   if (autoCheck && guess === answer) className += " autoCheckCorrect";
   if (blank) className += " blank";
