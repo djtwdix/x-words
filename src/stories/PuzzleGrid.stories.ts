@@ -1,4 +1,4 @@
-import { PuzzleGrid } from "../components/Puzzle/PuzzleGrid";
+import { PuzzleGrid } from "../components/PuzzleGrid/PuzzleGrid";
 import { puzzleData } from "../puzzleData";
 
 const meta = {
