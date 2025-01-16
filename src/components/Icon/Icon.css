@@ -1,0 +1,11 @@
+.icon {
+  font-size: 50px;
+  color: rgb(65, 65, 255);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+.icon.selected {
+  color: white;
+  background-color: rgb(65, 65, 255);
+}
