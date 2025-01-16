@@ -47,6 +47,10 @@ export const PuzzleGrid = ({
           orientation === "down" ? selectedIndex + size : selectedIndex + 1;
 
         if (newIndex <= letterGrid.length - 1) setSelectedIndex(newIndex);
+
+        if (newIndex > puzzleGrid.length - 1) {
+          setSelectedIndex(selectedIndex - (puzzleGrid.length - 1));
+        }
       }
 
       //handle arrow navigation, delete and enter
