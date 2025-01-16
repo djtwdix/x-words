@@ -9,26 +9,26 @@ export default meta;
 
 export const Empty = {
   args: {
-    letter: "",
+    guess: "",
   },
 };
 
 export const WithLetter = {
   args: {
-    letter: "D",
+    guess: "D",
   },
 };
 
 export const Highlighted = {
   args: {
-    letter: "D",
+    guess: "D",
     highlighted: true,
   },
 };
 
 export const Selected = {
   args: {
-    letter: "D",
+    guess: "D",
     selected: true,
   },
 };
@@ -42,14 +42,14 @@ export const Blank = {
 export const WithClueNumber = {
   args: {
     clueNumber: 6,
-    letter: "D",
+    guess: "D",
   },
 };
 
 export const AutoCheckCorrect = {
   args: {
     clueNumber: 6,
-    letter: "D",
+    guess: "D",
     autoCheck: true,
     answer: "D",
   },
@@ -58,7 +58,7 @@ export const AutoCheckCorrect = {
 export const AutoCheckCorrectHighlighted = {
   args: {
     clueNumber: 6,
-    letter: "D",
+    guess: "D",
     autoCheck: true,
     answer: "D",
     highlighted: true,
@@ -68,7 +68,7 @@ export const AutoCheckCorrectHighlighted = {
 export const AutoCheckCorrectSelected = {
   args: {
     clueNumber: 6,
-    letter: "D",
+    guess: "D",
     autoCheck: true,
     answer: "D",
     selected: true,
@@ -78,7 +78,7 @@ export const AutoCheckCorrectSelected = {
 export const AutoCheckWrong = {
   args: {
     clueNumber: 6,
-    letter: "D",
+    guess: "D",
     autoCheck: true,
     answer: "T",
   },
@@ -87,7 +87,7 @@ export const AutoCheckWrong = {
 export const AutoCheckWrongHighlighted = {
   args: {
     clueNumber: 6,
-    letter: "D",
+    guess: "D",
     autoCheck: true,
     answer: "T",
     highlighted: true,
@@ -97,7 +97,7 @@ export const AutoCheckWrongHighlighted = {
 export const AutoCheckWrongSelected = {
   args: {
     clueNumber: 6,
-    letter: "D",
+    guess: "D",
     autoCheck: true,
     answer: "T",
     selected: true,
