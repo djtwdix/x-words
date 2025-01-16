@@ -16,7 +16,7 @@ export interface PuzzleData {
 
 export interface PuzzleCellData {
   clueNumber?: number;
-  letter: string | null;
+  answer: string | null;
   guess?: string;
   clues?: {
     across: number;
@@ -47,7 +47,7 @@ export const puzzleData: PuzzleData = {
   },
   grid: [
     {
-      letter: "M",
+      answer: "M",
       clueNumber: 1,
       clues: {
         across: 1,
@@ -55,7 +55,7 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "E",
+      answer: "E",
       clueNumber: 2,
       clues: {
         across: 1,
@@ -63,7 +63,7 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "M",
+      answer: "M",
       clueNumber: 3,
       clues: {
         across: 1,
@@ -71,7 +71,7 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "E",
+      answer: "E",
       clueNumber: 4,
       clues: {
         across: 1,
@@ -79,10 +79,10 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: null,
+      answer: null,
     },
     {
-      letter: "E",
+      answer: "E",
       clueNumber: 5,
       clues: {
         across: 5,
@@ -90,28 +90,28 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "V",
+      answer: "V",
       clues: {
         across: 5,
         down: 2,
       },
     },
     {
-      letter: "A",
+      answer: "A",
       clues: {
         across: 5,
         down: 3,
       },
     },
     {
-      letter: "D",
+      answer: "D",
       clues: {
         across: 5,
         down: 4,
       },
     },
     {
-      letter: "E",
+      answer: "E",
       clueNumber: 6,
       clues: {
         across: 5,
@@ -119,7 +119,7 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "S",
+      answer: "S",
       clueNumber: 7,
       clues: {
         across: 7,
@@ -127,35 +127,35 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "O",
+      answer: "O",
       clues: {
         across: 7,
         down: 2,
       },
     },
     {
-      letter: "N",
+      answer: "N",
       clues: {
         across: 7,
         down: 3,
       },
     },
     {
-      letter: "I",
+      answer: "I",
       clues: {
         across: 7,
         down: 4,
       },
     },
     {
-      letter: "A",
+      answer: "A",
       clues: {
         across: 7,
         down: 6,
       },
     },
     {
-      letter: "S",
+      answer: "S",
       clueNumber: 8,
       clues: {
         across: 8,
@@ -163,35 +163,35 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "K",
+      answer: "K",
       clues: {
         across: 8,
         down: 2,
       },
     },
     {
-      letter: "I",
+      answer: "I",
       clues: {
         across: 8,
         down: 3,
       },
     },
     {
-      letter: "T",
+      answer: "T",
       clues: {
         across: 8,
         down: 4,
       },
     },
     {
-      letter: "S",
+      answer: "S",
       clues: {
         across: 8,
         down: 6,
       },
     },
     {
-      letter: "Y",
+      answer: "Y",
       clueNumber: 9,
       clues: {
         across: 9,
@@ -199,28 +199,28 @@ export const puzzleData: PuzzleData = {
       },
     },
     {
-      letter: "E",
+      answer: "E",
       clues: {
         across: 9,
         down: 2,
       },
     },
     {
-      letter: "A",
+      answer: "A",
       clues: {
         across: 9,
         down: 3,
       },
     },
     {
-      letter: "S",
+      answer: "S",
       clues: {
         across: 9,
         down: 4,
       },
     },
     {
-      letter: "T",
+      answer: "T",
       clues: {
         across: 9,
         down: 6,
