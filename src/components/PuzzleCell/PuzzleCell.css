@@ -9,6 +9,7 @@
   font-size: xx-large;
   position: relative;
   overflow: hidden;
+  font-family: "Arial";
 }
 
 .square.highlighted {
