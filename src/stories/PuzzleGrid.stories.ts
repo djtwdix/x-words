@@ -10,13 +10,15 @@ export default meta;
 
 export const Default = {
   args: {
-    puzzleData,
+    letterGrid: puzzleData.grid,
+    size: puzzleData.size.cols,
   },
 };
 
 export const WithAutoCheck = {
   args: {
-    puzzleData,
+    letterGrid: puzzleData.grid,
+    size: puzzleData.size.cols,
     autoCheck: true,
   },
 };

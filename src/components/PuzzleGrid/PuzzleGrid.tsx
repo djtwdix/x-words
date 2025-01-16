@@ -1,20 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { PuzzleCell } from "../PuzzleCell/PuzzleCell";
-import { PuzzleData } from "../../puzzleData";
+import { PuzzleCellData } from "../../puzzleData";
 import "./PuzzleGrid.css";
 
 type Orientation = "across" | "down";
 
 export interface PuzzleGridProps {
-  puzzleData: PuzzleData;
+  letterGrid: PuzzleCellData[];
   autoCheck: boolean;
+  inListView: boolean;
+  size: number; //number that corresponds to the amount of columns in the grid
 }
 
-export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
+export const PuzzleGrid = ({
+  letterGrid,
+  autoCheck,
+  size,
+  inListView,
+}: PuzzleGridProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedClue, setSelectedClue] = useState<number | undefined>(0);
   const [orientation, setOrientation] = useState("across");
-  const [puzzleGrid, setPuzzleGrid] = useState(puzzleData.grid);
+  const [puzzleGrid, setPuzzleGrid] = useState(letterGrid);
   const gridRef = useRef<HTMLDivElement>(null);
 
   //helper function that flips the orientation state
@@ -37,34 +44,36 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
       if (alpha.includes(e.key)) {
         cellData.guess = e.key.toUpperCase();
         const newIndex =
-          orientation === "down"
-            ? selectedIndex + puzzleData.size.cols
-            : selectedIndex + 1;
+          orientation === "down" ? selectedIndex + size : selectedIndex + 1;
 
-        setSelectedIndex(newIndex);
+        if (newIndex <= letterGrid.length - 1) setSelectedIndex(newIndex);
       }
 
       //handle arrow navigation, delete and enter
       switch (e.key) {
         case "Backspace":
+          orientation === "across"
+            ? setSelectedIndex(selectedIndex - 1)
+            : setSelectedIndex(selectedIndex - size);
+
           cellData.guess = "";
           break;
         case "ArrowLeft":
-          const isFirstColumn = selectedIndex % puzzleData.size.cols === 0;
+          const isFirstColumn = selectedIndex % size === 0;
           if (!isFirstColumn) setSelectedIndex(selectedIndex - 1);
           break;
         case "ArrowRight":
-          const isLastColumn = (selectedIndex + 1) % puzzleData.size.cols === 0;
+          const isLastColumn = (selectedIndex + 1) % size === 0;
           if (!isLastColumn)
             setSelectedIndex(
               Math.min(selectedIndex + 1, puzzleGrid.length - 1)
             );
           break;
         case "ArrowDown":
-          setSelectedIndex(selectedIndex + puzzleData.size.cols);
+          setSelectedIndex(selectedIndex + size);
           break;
         case "ArrowUp":
-          setSelectedIndex(selectedIndex - puzzleData.size.cols);
+          setSelectedIndex(selectedIndex - size);
           break;
         case "Enter":
           changeOrientation();
@@ -84,8 +93,7 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
     ) {
       if (orientation === "across") setSelectedIndex(selectedIndex + 1);
 
-      if (orientation === "down")
-        setSelectedIndex(selectedIndex + puzzleData.size.cols);
+      if (orientation === "down") setSelectedIndex(selectedIndex + size);
     }
 
     //if you navigate down beyond the grid length set index to start of next column
@@ -106,7 +114,7 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
       tabIndex={0}
       onKeyDown={handleKeyDown}
       className="puzzleGrid"
-      style={{ maxWidth: puzzleData.size.rows * 75 }}
+      style={{ maxWidth: size * 75 }}
     >
       {puzzleGrid.map((cellData, index) => {
         return (
@@ -120,6 +128,7 @@ export const PuzzleGrid = ({ puzzleData, autoCheck }: PuzzleGridProps) => {
             blank={!cellData.answer}
             selected={selectedIndex === index}
             autoCheck={autoCheck}
+            inListView={inListView}
             highlighted={
               cellData.clues?.[orientation as Orientation] === selectedClue
             }
