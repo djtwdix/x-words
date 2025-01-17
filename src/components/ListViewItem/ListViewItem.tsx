@@ -2,18 +2,25 @@ import { PuzzleGrid } from "../PuzzleGrid/PuzzleGrid";
 import "./ListViewItem.css";
 
 export interface ListViewItemProps {
+  index: number;
   clue: string;
   answer: string;
   autoCheck: boolean;
+  handleSelect: (index: number) => void;
   selected: boolean;
 }
 
 export const ListViewItem = ({
+  index,
   clue,
   answer,
   autoCheck,
+  handleSelect,
   selected,
 }: ListViewItemProps) => {
+  let className = "listViewItem";
+  if (selected) className += " selected";
+
   const letterGrid = answer
     .toUpperCase()
     .split("")
@@ -21,12 +28,9 @@ export const ListViewItem = ({
       return { answer: letter };
     });
 
-  let className = "listViewItem";
-  if (selected) className += " selected";
-
   return (
-    <div className={className}>
-      <h1>{clue}</h1>
+    <div className={className} onClick={() => handleSelect(index)}>
+      <h2>{clue}</h2>
       {
         <PuzzleGrid
           letterGrid={letterGrid}
