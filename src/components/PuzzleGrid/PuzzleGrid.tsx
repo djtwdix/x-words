@@ -102,9 +102,9 @@ export const PuzzleGrid = ({
       if (orientation === "down") setSelectedIndex(selectedIndex + size);
     }
 
-    //if you navigate down beyond the grid length set index to start of next column
+    //if you reach the end of a column, stop navigating
     if (selectedIndex > puzzleGrid.length - 1) {
-      setSelectedIndex(selectedIndex - (puzzleGrid.length - 1));
+      setSelectedIndex(selectedIndex - size);
     }
 
     setSelectedClue(
