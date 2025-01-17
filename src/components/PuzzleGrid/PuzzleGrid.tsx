@@ -118,7 +118,7 @@ export const PuzzleGrid = ({
       tabIndex={0}
       onKeyDown={handleKeyDown}
       className="puzzleGrid"
-      style={{ maxWidth: size * 75 }}
+      style={{ maxWidth: size * (inListView ? 40 : 75) }}
     >
       {puzzleGrid.map((cellData, index) => {
         return (

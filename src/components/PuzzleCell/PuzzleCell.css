@@ -44,3 +44,9 @@
 .square.blank {
   background-color: black;
 }
+
+.square.inListView {
+  height: 40px;
+  width: 40px;
+  font-size: large;
+}

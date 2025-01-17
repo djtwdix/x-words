@@ -30,6 +30,7 @@ export const PuzzleCell = ({
   if (selected) className += " selected";
   if (autoCheck && guess === answer) className += " autoCheckCorrect";
   if (blank) className += " blank";
+  if (inListView) className += " inListView";
 
   const autoCheckWrong = autoCheck && guess && guess !== answer;
 
