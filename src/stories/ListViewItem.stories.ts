@@ -15,6 +15,14 @@ export const ExampleOne = {
   },
 };
 
+export const ExampleOneSelected = {
+  args: {
+    clue: puzzleData.clues.across[0],
+    answer: puzzleData.answers.across[0],
+    selected: true,
+  },
+};
+
 export const ExampleOneWithAutoCheck = {
   args: {
     clue: puzzleData.clues.across[0],
@@ -27,6 +35,14 @@ export const ExampleTwo = {
   args: {
     clue: puzzleData.clues.across[1],
     answer: puzzleData.answers.across[1],
+  },
+};
+
+export const ExampleTwoSelected = {
+  args: {
+    clue: puzzleData.clues.across[1],
+    answer: puzzleData.answers.across[1],
+    selected: true,
   },
 };
 

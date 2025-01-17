@@ -1,3 +1,8 @@
-.listViewCells {
-  display: flex;
+.listViewItem {
+  max-width: 700px;
+  padding: 1rem;
+}
+
+.listViewItem.selected {
+  background-color: rgb(123, 202, 255);
 }

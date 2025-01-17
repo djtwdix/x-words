@@ -1,5 +1,6 @@
 .square {
   border: 1px solid grey;
+  background-color: white;
   box-sizing: border-box;
   height: 75px;
   width: 75px;

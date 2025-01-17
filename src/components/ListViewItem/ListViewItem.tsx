@@ -5,12 +5,14 @@ export interface ListViewItemProps {
   clue: string;
   answer: string;
   autoCheck: boolean;
+  selected: boolean;
 }
 
 export const ListViewItem = ({
   clue,
   answer,
   autoCheck,
+  selected,
 }: ListViewItemProps) => {
   const letterGrid = answer
     .toUpperCase()
@@ -19,8 +21,11 @@ export const ListViewItem = ({
       return { answer: letter };
     });
 
+  let className = "listViewItem";
+  if (selected) className += " selected";
+
   return (
-    <div>
+    <div className={className}>
       <h1>{clue}</h1>
       {
         <PuzzleGrid
