@@ -9,6 +9,7 @@ export interface PuzzleGridProps {
   letterGrid: PuzzleCellData[];
   autoCheck: boolean;
   inListView: boolean;
+  selectedInListView: boolean;
   size: number; //number that corresponds to the amount of columns in the grid
 }
 
@@ -17,6 +18,7 @@ export const PuzzleGrid = ({
   autoCheck,
   size,
   inListView,
+  selectedInListView,
 }: PuzzleGridProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedClue, setSelectedClue] = useState<number | undefined>(0);
@@ -133,6 +135,7 @@ export const PuzzleGrid = ({
             selected={selectedIndex === index}
             autoCheck={autoCheck}
             inListView={inListView}
+            selectedInListView={selectedInListView}
             highlighted={
               cellData.clues?.[orientation as Orientation] === selectedClue
             }

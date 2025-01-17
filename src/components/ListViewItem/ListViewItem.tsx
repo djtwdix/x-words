@@ -37,6 +37,7 @@ export const ListViewItem = ({
           size={answer.length}
           autoCheck={autoCheck}
           inListView={true}
+          selectedInListView={selected}
         />
       }
     </div>

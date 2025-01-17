@@ -11,6 +11,7 @@ export interface PuzzleCellProps {
   autoCheck?: boolean;
   index: number;
   inListView: boolean;
+  selectedInListView: boolean;
 }
 
 export const PuzzleCell = ({
@@ -23,11 +24,19 @@ export const PuzzleCell = ({
   clueNumber,
   autoCheck,
   inListView,
+  selectedInListView,
   blank,
 }: PuzzleCellProps) => {
   let className = "square";
   if (highlighted && !inListView) className += " highlighted";
-  if (selected) className += " selected";
+  if (selected) {
+    //if in listview but the item is not selected we don't want squares to highlight
+    className += inListView
+      ? selectedInListView
+        ? " selected"
+        : ""
+      : " selected";
+  }
   if (autoCheck && guess === answer) className += " autoCheckCorrect";
   if (blank) className += " blank";
   if (inListView) className += " inListView";
