@@ -1,6 +1,7 @@
 .listViewItem {
   max-width: 700px;
   padding: 1rem;
+  font-family: "Arial";
 }
 
 .listViewItem.selected {
