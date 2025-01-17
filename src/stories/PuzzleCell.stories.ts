@@ -1,7 +1,7 @@
 import { PuzzleCell } from "../components/PuzzleCell/PuzzleCell";
 
 const meta = {
-  title: "PuzzleCell",
+  title: "Components/PuzzleCell",
   component: PuzzleCell,
 };
 

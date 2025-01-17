@@ -2,7 +2,7 @@ import { ListView } from "../components/ListView/ListView";
 import { puzzleData } from "../puzzleData";
 
 const meta = {
-  title: "ListView",
+  title: "Components/ListView",
   component: ListView,
 };
 

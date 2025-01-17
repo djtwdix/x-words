@@ -2,7 +2,7 @@ import { PuzzleGrid } from "../components/PuzzleGrid/PuzzleGrid";
 import { puzzleData } from "../puzzleData";
 
 const meta = {
-  title: "PuzzleGrid",
+  title: "Components/PuzzleGrid",
   component: PuzzleGrid,
 };
 
