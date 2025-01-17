@@ -1,0 +1,12 @@
+.settingsBar {
+  width: 500px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.settingsBar .icons {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+}
