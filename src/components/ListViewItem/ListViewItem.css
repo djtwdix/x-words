@@ -5,7 +5,7 @@
 }
 
 .listViewItem h4 {
-  padding: 0;
+  margin-bottom: 10px;
 }
 
 .listViewItem.selected {
