@@ -1,4 +1,4 @@
-.square {
+.cell {
   border: 1px solid grey;
   background-color: white;
   box-sizing: border-box;
@@ -13,15 +13,15 @@
   font-family: "Arial";
 }
 
-.square.highlighted {
+.cell.highlighted {
   background-color: rgb(123, 202, 255);
 }
 
-.square.selected {
+.cell.selected {
   background-color: yellow;
 }
 
-.square .clueNumber {
+.cell .clueNumber {
   position: absolute;
   top: 0;
   left: 0;
@@ -30,22 +30,22 @@
   font-size: small;
 }
 
-.square.autoCheckCorrect .guess {
+.cell.autoCheckCorrect .guess {
   color: blue;
 }
 
-.square .autoCheckWrong {
+.cell .autoCheckWrong {
   height: 105px;
   border: 1px solid red;
   position: absolute;
   rotate: 45deg;
 }
 
-.square.blank {
+.cell.blank {
   background-color: black;
 }
 
-.square.inListView {
+.cell.inListView {
   height: 30px;
   width: 30px;
   font-size: large;

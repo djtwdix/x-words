@@ -27,7 +27,7 @@ export const PuzzleCell = ({
   selectedInListView,
   blank,
 }: PuzzleCellProps) => {
-  let className = "square";
+  let className = "cell";
   if (highlighted && !inListView) className += " highlighted";
   if (selected) {
     //if in listview but the item is not selected we don't want squares to highlight
