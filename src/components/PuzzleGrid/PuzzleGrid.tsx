@@ -8,8 +8,8 @@ type Orientation = "across" | "down";
 export interface PuzzleGridProps {
   letterGrid: PuzzleCellData[];
   autoCheck: boolean;
-  inListView: boolean;
-  selectedInListView: boolean;
+  inListView?: boolean | undefined;
+  selectedInListView?: boolean | undefined;
   size: number; //number that corresponds to the amount of columns in the grid
 }
 
@@ -120,7 +120,7 @@ export const PuzzleGrid = ({
       tabIndex={0}
       onKeyDown={handleKeyDown}
       className="puzzleGrid"
-      style={{ maxWidth: size * (inListView ? 40 : 75) }}
+      style={{ maxWidth: size * (inListView ? 30 : 75) }}
     >
       {puzzleGrid.map((cellData, index) => {
         return (

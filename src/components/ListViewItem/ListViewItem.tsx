@@ -30,7 +30,7 @@ export const ListViewItem = ({
 
   return (
     <div className={className} onClick={() => handleSelect(index)}>
-      <h2>{clue}</h2>
+      <h4>{clue}</h4>
       {
         <PuzzleGrid
           letterGrid={letterGrid}

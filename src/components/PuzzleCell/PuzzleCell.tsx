@@ -10,8 +10,8 @@ export interface PuzzleCellProps {
   clueNumber?: number;
   autoCheck?: boolean;
   index: number;
-  inListView: boolean;
-  selectedInListView: boolean;
+  inListView?: boolean | undefined;
+  selectedInListView?: boolean | undefined;
 }
 
 export const PuzzleCell = ({

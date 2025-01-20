@@ -1,9 +1,13 @@
 .listViewItem {
-  max-width: 700px;
-  padding: 1rem;
+  max-width: 375px;
+  padding: 10px;
   font-family: "Arial";
 }
 
+.listViewItem h4 {
+  padding: 0;
+}
+
 .listViewItem.selected {
-  background-color: rgb(123, 202, 255);
+  background-color: rgb(62, 129, 253);
 }
