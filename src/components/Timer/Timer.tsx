@@ -11,7 +11,6 @@ export const Timer = ({ startTime = 0 }: TimerProps) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      console.log("second");
       setTime(time + 1);
     }, 1000);
 
