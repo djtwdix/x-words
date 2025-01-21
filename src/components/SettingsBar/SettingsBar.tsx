@@ -7,7 +7,6 @@ export interface SettingsBarProps {
 }
 
 export const SettingsBar = ({ icons }: SettingsBarProps) => {
-  console.log("icons: ", icons);
   return (
     <div className="settingsBar">
       <Timer />
