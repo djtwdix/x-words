@@ -2,7 +2,7 @@ import { GamePage } from "../pages/GamePage/GamePage";
 import { puzzleData } from "../puzzleData";
 
 const meta = {
-  title: "Pages/Crossword",
+  title: "Pages/GamePage",
   component: GamePage,
 };
 

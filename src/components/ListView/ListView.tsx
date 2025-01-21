@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { ListViewItem } from "../ListViewItem/ListViewItem";
+import { usePuzzleContext } from "../../contexts/PuzzleContext";
 
 export interface ListViewProps {
   clues: string[];
@@ -11,14 +11,16 @@ export const ListView = ({ clues, answers }: ListViewProps) => {
     return { clue, answer: "" };
   });
 
+  const { setSelectedIndex, selectedIndex, setSelectedClueNumber } =
+    usePuzzleContext();
+
   answers.forEach((answer, index) => {
     cluesAndAnswers[index].answer = answer;
   });
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const handleSelect = (index: number) => {
+  const handleSelect = (index: number, clueNumber: number) => {
     setSelectedIndex(index);
+    setSelectedClueNumber(clueNumber);
   };
 
   return (

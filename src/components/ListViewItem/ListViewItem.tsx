@@ -1,3 +1,4 @@
+import { PuzzleCell } from "../PuzzleCell/PuzzleCell";
 import { PuzzleGrid } from "../PuzzleGrid/PuzzleGrid";
 import "./ListViewItem.css";
 
@@ -6,7 +7,7 @@ export interface ListViewItemProps {
   clue: string;
   answer: string;
   autoCheck: boolean;
-  handleSelect: (index: number) => void;
+  handleSelect: (index: number, clueNumber: number) => void;
   selected: boolean;
 }
 
@@ -31,17 +32,20 @@ export const ListViewItem = ({
   return (
     <div
       className={className}
-      onClick={() => handleSelect && handleSelect(index)}
+      onClick={() => handleSelect && handleSelect(index, Number(clue[0]))}
     >
       <h4>{clue}</h4>
       {
-        <PuzzleGrid
+        letterGrid.map((letterObj) => {
+          return <PuzzleCell answer={letterObj.answer} />;
+        })
+        /*    <PuzzleGrid
           letterGrid={letterGrid}
           size={answer.length}
           autoCheck={autoCheck}
           inListView={true}
           selectedInListView={selected}
-        />
+        /> */
       }
     </div>
   );
