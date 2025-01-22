@@ -2,38 +2,39 @@ import { useEffect, useRef, useState } from "react";
 import { PuzzleCell } from "../PuzzleCell/PuzzleCell";
 import { PuzzleCellData } from "../../puzzleData";
 import "./PuzzleGrid.css";
+import { usePuzzleContext } from "../../contexts/PuzzleContext";
 
 type Orientation = "across" | "down";
 
 export interface PuzzleGridProps {
   letterGrid: PuzzleCellData[];
   autoCheck: boolean;
-  inListView?: boolean | undefined;
+  isListView?: boolean | undefined;
   selectedInListView?: boolean | undefined;
   size: number; //number that corresponds to the amount of columns in the grid
 }
 
 export const PuzzleGrid = ({
   letterGrid,
-  autoCheck,
   size,
-  inListView,
+  isListView,
   selectedInListView,
 }: PuzzleGridProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedClue, setSelectedClue] = useState<number | undefined>(0);
-  const [orientation, setOrientation] = useState("across");
   const [puzzleGrid, setPuzzleGrid] = useState(letterGrid);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  //helper function that flips the orientation state
-  const changeOrientation = () => {
-    setOrientation((prev) => (prev === "across" ? "down" : "across"));
-  };
+  const {
+    setSelectedClueNumber,
+    selectedClueNumber,
+    orientation,
+    changeOrientation,
+    listView,
+  } = usePuzzleContext();
 
   const handleCellClick = (index: number, clickCount: number) => {
     setSelectedIndex(index);
-
+    if (listView) return;
     if (clickCount > 1) changeOrientation();
   };
 
@@ -50,7 +51,7 @@ export const PuzzleGrid = ({
 
         if (newIndex <= letterGrid.length - 1) setSelectedIndex(newIndex);
 
-        if (newIndex > puzzleGrid.length - 1) {
+        if (newIndex > puzzleGrid.length - 1 && !listView) {
           setSelectedIndex(selectedIndex - (puzzleGrid.length - 1));
         }
       }
@@ -107,9 +108,11 @@ export const PuzzleGrid = ({
       setSelectedIndex(selectedIndex - size);
     }
 
-    setSelectedClue(
-      puzzleGrid[selectedIndex]?.clues?.[orientation as Orientation]
-    );
+    if (!listView) {
+      setSelectedClueNumber(
+        puzzleGrid[selectedIndex]?.clues?.[orientation as Orientation]
+      );
+    }
 
     return () => {};
   }, [puzzleGrid, selectedIndex, orientation]);
@@ -120,7 +123,7 @@ export const PuzzleGrid = ({
       tabIndex={0}
       onKeyDown={handleKeyDown}
       className="puzzleGrid"
-      style={{ maxWidth: size * (inListView ? 30 : 75) }}
+      style={{ maxWidth: size * (isListView ? 30 : 75) }}
     >
       {puzzleGrid.map((cellData, index) => {
         return (
@@ -133,11 +136,11 @@ export const PuzzleGrid = ({
             answer={cellData.answer}
             blank={!cellData.answer}
             selected={selectedIndex === index}
-            autoCheck={autoCheck}
-            inListView={inListView}
+            isListView={isListView}
             selectedInListView={selectedInListView}
             highlighted={
-              cellData.clues?.[orientation as Orientation] === selectedClue
+              cellData.clues?.[orientation as Orientation] ===
+              selectedClueNumber
             }
           />
         );

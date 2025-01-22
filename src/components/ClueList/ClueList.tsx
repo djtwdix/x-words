@@ -8,6 +8,8 @@ export interface ClueListProps {
 }
 
 export const ClueList = ({ clues, answers }: ClueListProps) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   const cluesAndAnswers = clues.map((clue) => {
     return { clue, answer: "" };
   });
@@ -15,8 +17,6 @@ export const ClueList = ({ clues, answers }: ClueListProps) => {
   answers.forEach((answer, index) => {
     cluesAndAnswers[index].answer = answer;
   });
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleSelect = (index: number) => {
     setSelectedIndex(index);

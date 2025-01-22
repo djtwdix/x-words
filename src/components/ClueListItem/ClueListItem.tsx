@@ -44,7 +44,7 @@ export const ClueListItem = ({
           letterGrid={letterGrid}
           size={letterGrid.length}
           autoCheck={autoCheck}
-          inListView={true}
+          isListView={true}
           selectedInListView={selected}
         />
       }

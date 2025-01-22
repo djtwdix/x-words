@@ -50,3 +50,7 @@
   width: 30px;
   font-size: large;
 }
+
+.cell.pencil h2 {
+  color: rgb(146, 146, 146);
+}

@@ -24,6 +24,10 @@ export interface PuzzleContextType {
   changeOrientation: () => void;
   listView: boolean;
   setListView: Dispatch<SetStateAction<boolean>>;
+  autoCheck: boolean;
+  setAutoCheck: Dispatch<SetStateAction<boolean>>;
+  pencil: boolean;
+  setPencil: Dispatch<SetStateAction<boolean>>;
 }
 
 export const PuzzleProvider = ({ children, puzzleData }: any) => {
@@ -33,8 +37,9 @@ export const PuzzleProvider = ({ children, puzzleData }: any) => {
     number | undefined
   >(0);
   const [orientation, setOrientation] = useState("across" as Orientation);
-
   const [listView, setListView] = useState(false);
+  const [autoCheck, setAutoCheck] = useState(false);
+  const [pencil, setPencil] = useState(false);
 
   useEffect(() => {
     puzzleData.clues[orientation].forEach((clue: string) => {
@@ -59,6 +64,10 @@ export const PuzzleProvider = ({ children, puzzleData }: any) => {
         changeOrientation,
         listView,
         setListView,
+        autoCheck,
+        setAutoCheck,
+        pencil,
+        setPencil,
       }}
     >
       {children}
