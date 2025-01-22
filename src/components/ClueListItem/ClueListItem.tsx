@@ -1,32 +1,37 @@
+import { usePuzzleContext } from "../../contexts/PuzzleContext";
+import { PuzzleCellData } from "../../puzzleData";
 import { PuzzleGrid } from "../PuzzleGrid/PuzzleGrid";
-import "./ListViewItem.css";
+import "./ClueListItem.css";
 
-export interface ListViewItemProps {
+export interface ClueListItemProps {
   index: number;
   clue: string;
-  answer: string;
   autoCheck: boolean;
   handleSelect: (index: number) => void;
   selected: boolean;
 }
 
-export const ListViewItem = ({
+export const ClueListItem = ({
   index,
   clue,
-  answer,
   autoCheck,
   handleSelect,
   selected,
-}: ListViewItemProps) => {
-  let className = "listViewItem";
+}: ClueListItemProps) => {
+  let className = "clueListItem";
   if (selected) className += " selected";
 
-  const letterGrid = answer
-    .toUpperCase()
-    .split("")
-    .map((letter) => {
-      return { answer: letter };
-    });
+  const clueNumber = Number(clue[0]);
+
+  const { puzzleInfo } = usePuzzleContext();
+
+  const letterGrid: PuzzleCellData[] = [];
+
+  puzzleInfo.grid.forEach((letterObj) => {
+    if (letterObj.clues?.across === clueNumber) {
+      letterGrid.push(letterObj);
+    }
+  });
 
   return (
     <div
@@ -37,7 +42,7 @@ export const ListViewItem = ({
       {
         <PuzzleGrid
           letterGrid={letterGrid}
-          size={answer.length}
+          size={letterGrid.length}
           autoCheck={autoCheck}
           inListView={true}
           selectedInListView={selected}

@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { ListViewItem } from "../ListViewItem/ListViewItem";
+import { ClueListItem } from "../ClueListItem/ClueListItem";
+import "./ClueList.css";
 
-export interface ListViewProps {
+export interface ClueListProps {
   clues: string[];
   answers: string[];
 }
 
-export const ListView = ({ clues, answers }: ListViewProps) => {
+export const ClueList = ({ clues, answers }: ClueListProps) => {
   const cluesAndAnswers = clues.map((clue) => {
     return { clue, answer: "" };
   });
@@ -22,14 +23,13 @@ export const ListView = ({ clues, answers }: ListViewProps) => {
   };
 
   return (
-    <div>
+    <div className="clueList">
       {cluesAndAnswers.map((obj, index) => {
         return (
-          <ListViewItem
+          <ClueListItem
             key={index}
             index={index}
             clue={obj.clue}
-            answer={obj.answer}
             autoCheck={false}
             selected={selectedIndex === index}
             handleSelect={handleSelect}

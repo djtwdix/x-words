@@ -1,9 +1,9 @@
-import { ListViewItem } from "../components/ListViewItem/ListViewItem";
+import { ClueListItem } from "../components/ClueListItem/ClueListItem";
 import { puzzleData } from "../puzzleData";
 
 const meta = {
-  title: "Components/ListViewItem",
-  component: ListViewItem,
+  title: "Components/ClueListItem",
+  component: ClueListItem,
 };
 
 export default meta;

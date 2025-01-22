@@ -1,13 +1,13 @@
-.listViewItem {
+.clueListItem {
   max-width: 375px;
   padding: 10px;
   font-family: "Arial";
 }
 
-.listViewItem h4 {
+.clueListItem h4 {
   margin-bottom: 10px;
 }
 
-.listViewItem.selected {
+.clueListItem.selected {
   background-color: rgb(62, 129, 253);
 }
