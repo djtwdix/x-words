@@ -7,8 +7,6 @@ export interface ClueListItemProps {
   index: number;
   clue: string;
   autoCheck: boolean;
-  handleSelect: (index: number) => void;
-  selected: boolean;
   orientation: Orientation;
 }
 
@@ -16,12 +14,11 @@ export const ClueListItem = ({
   index,
   clue,
   autoCheck,
-  handleSelect,
-  selected,
   orientation,
 }: ClueListItemProps) => {
+  const { selectedListViewClue, setSelectedListViewClue } = usePuzzleContext();
   let className = "clueListItem";
-  if (selected) className += " selected";
+  if (clue === selectedListViewClue) className += " selected";
 
   const clueNumber = Number(clue[0]);
 
@@ -36,10 +33,7 @@ export const ClueListItem = ({
   });
 
   return (
-    <div
-      className={className}
-      onClick={() => handleSelect && handleSelect(index)}
-    >
+    <div className={className} onClick={() => setSelectedListViewClue(clue)}>
       <h4>{clue}</h4>
       {
         <PuzzleGrid
@@ -47,7 +41,7 @@ export const ClueListItem = ({
           size={letterGrid.length}
           autoCheck={autoCheck}
           isListView={true}
-          selectedInListView={selected}
+          selectedInListView={clue === selectedListViewClue}
         />
       }
     </div>

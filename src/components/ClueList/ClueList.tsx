@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ClueListItem } from "../ClueListItem/ClueListItem";
 import "./ClueList.css";
 import { Orientation } from "../../contexts/PuzzleContext";
@@ -10,8 +9,6 @@ export interface ClueListProps {
 }
 
 export const ClueList = ({ clues, answers, orientation }: ClueListProps) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
   const cluesAndAnswers = clues.map((clue) => {
     return { clue, answer: "" };
   });
@@ -19,10 +16,6 @@ export const ClueList = ({ clues, answers, orientation }: ClueListProps) => {
   answers.forEach((answer, index) => {
     cluesAndAnswers[index].answer = answer;
   });
-
-  const handleSelect = (index: number) => {
-    setSelectedIndex(index);
-  };
 
   return (
     <div className="clueList">
@@ -37,8 +30,6 @@ export const ClueList = ({ clues, answers, orientation }: ClueListProps) => {
             index={index}
             clue={obj.clue}
             autoCheck={false}
-            selected={selectedIndex === index}
-            handleSelect={handleSelect}
             orientation={orientation}
           />
         );

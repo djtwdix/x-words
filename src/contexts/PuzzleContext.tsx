@@ -20,6 +20,8 @@ export interface PuzzleContextType {
   selectedClueNumber: number | undefined;
   setSelectedClueNumber: Dispatch<SetStateAction<number | undefined>>;
   selectedClue: string;
+  selectedListViewClue: string;
+  setSelectedListViewClue: Dispatch<SetStateAction<string>>;
   orientation: Orientation;
   changeOrientation: () => void;
   listView: boolean;
@@ -36,6 +38,7 @@ export const PuzzleProvider = ({ children, puzzleData }: any) => {
   const [selectedClueNumber, setSelectedClueNumber] = useState<
     number | undefined
   >(0);
+  const [selectedListViewClue, setSelectedListViewClue] = useState("");
   const [orientation, setOrientation] = useState("across" as Orientation);
   const [listView, setListView] = useState(false);
   const [autoCheck, setAutoCheck] = useState(false);
@@ -60,6 +63,8 @@ export const PuzzleProvider = ({ children, puzzleData }: any) => {
         selectedClueNumber,
         setSelectedClueNumber,
         selectedClue,
+        setSelectedListViewClue,
+        selectedListViewClue,
         orientation,
         changeOrientation,
         listView,
