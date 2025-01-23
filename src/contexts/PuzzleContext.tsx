@@ -12,7 +12,7 @@ export const PuzzleContext = createContext<PuzzleContextType | undefined>(
   undefined
 );
 
-type Orientation = "across" | "down";
+export type Orientation = "across" | "down";
 
 export interface PuzzleContextType {
   puzzleInfo: PuzzleData;

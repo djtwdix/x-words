@@ -1,4 +1,4 @@
-import { usePuzzleContext } from "../../contexts/PuzzleContext";
+import { Orientation, usePuzzleContext } from "../../contexts/PuzzleContext";
 import { PuzzleCellData } from "../../puzzleData";
 import { PuzzleGrid } from "../PuzzleGrid/PuzzleGrid";
 import "./ClueListItem.css";
@@ -9,6 +9,7 @@ export interface ClueListItemProps {
   autoCheck: boolean;
   handleSelect: (index: number) => void;
   selected: boolean;
+  orientation: Orientation;
 }
 
 export const ClueListItem = ({
@@ -17,10 +18,12 @@ export const ClueListItem = ({
   autoCheck,
   handleSelect,
   selected,
+  orientation,
 }: ClueListItemProps) => {
   let className = "clueListItem";
   if (selected) className += " selected";
 
+  console.log("orientation: ", orientation);
   const clueNumber = Number(clue[0]);
 
   const { puzzleInfo } = usePuzzleContext();
@@ -28,7 +31,7 @@ export const ClueListItem = ({
   const letterGrid: PuzzleCellData[] = [];
 
   puzzleInfo.grid.forEach((letterObj) => {
-    if (letterObj.clues?.across === clueNumber) {
+    if (letterObj.clues?.[orientation] === clueNumber) {
       letterGrid.push(letterObj);
     }
   });
