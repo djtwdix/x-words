@@ -1,5 +1,6 @@
 import { PuzzleGrid } from "../components/PuzzleGrid/PuzzleGrid";
 import { puzzleData } from "../puzzleData";
+import "../index.css";
 
 const meta = {
   title: "Components/PuzzleGrid",

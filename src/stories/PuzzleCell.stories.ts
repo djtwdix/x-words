@@ -1,4 +1,5 @@
 import { PuzzleCell } from "../components/PuzzleCell/PuzzleCell";
+import "../index.css";
 
 const meta = {
   title: "Components/PuzzleCell",

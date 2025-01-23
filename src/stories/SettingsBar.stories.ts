@@ -1,4 +1,5 @@
 import { SettingsBar } from "../components/SettingsBar/SettingsBar";
+import "../index.css";
 
 const meta = {
   title: "Components/SettingsBar",

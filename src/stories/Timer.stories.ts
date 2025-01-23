@@ -1,4 +1,5 @@
 import { Timer } from "../components/Timer/Timer";
+import "../index.css";
 
 const meta = {
   title: "Components/Timer",
