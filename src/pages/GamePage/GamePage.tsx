@@ -2,7 +2,7 @@ import { Clue } from "../../components/Clue/Clue";
 import { PuzzleGrid } from "../../components/PuzzleGrid/PuzzleGrid";
 import { SettingsBar } from "../../components/SettingsBar/SettingsBar";
 import { PuzzleData } from "../../puzzleData";
-import { ListView } from "../../components/ListView/ListView";
+import { ClueListView } from "../../components/ClueListView/ClueListView";
 import { usePuzzleContext } from "../../contexts/PuzzleContext";
 import "./GamePage.css";
 import "../../index.css";
@@ -18,7 +18,7 @@ export const GamePage = ({ puzzleData }: GamePageProps) => {
     <div className="gameContainer">
       <SettingsBar icons={icons} />
       {listView ? (
-        <ListView />
+        <ClueListView />
       ) : (
         <>
           <PuzzleGrid

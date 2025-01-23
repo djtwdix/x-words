@@ -1,18 +1,16 @@
 import { usePuzzleContext } from "../../contexts/PuzzleContext";
 import { ClueList } from "../ClueList/ClueList";
-import "./ListView.css";
+import "./ClueListView.css";
 
-export const ListView = () => {
+export const ClueListView = () => {
   const { puzzleInfo } = usePuzzleContext();
   return (
     <div>
-      {/* <h4>Across</h4> */}
       <ClueList
         clues={puzzleInfo.clues.across}
         answers={puzzleInfo.answers.across}
         orientation={"across"}
       />
-      {/* <h4>Down</h4> */}
       <ClueList
         clues={puzzleInfo.clues.down}
         answers={puzzleInfo.answers.down}
