@@ -23,12 +23,13 @@ export const PuzzleCell = ({
   answer,
   highlighted,
   clueNumber,
+  autoCheck,
   isListView,
   selectedInListView,
   blank,
 }: PuzzleCellProps) => {
   let className = "cell";
-  const { autoCheck, pencil } = usePuzzleContext();
+  const { pencil } = usePuzzleContext();
 
   if (highlighted && !isListView) className += " highlighted";
   if (selected) {

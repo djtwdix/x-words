@@ -30,6 +30,7 @@ export const PuzzleGrid = ({
     orientation,
     changeOrientation,
     listView,
+    autoCheck,
   } = usePuzzleContext();
 
   const handleCellClick = (index: number, clickCount: number) => {
@@ -137,6 +138,7 @@ export const PuzzleGrid = ({
             blank={!cellData.answer}
             selected={selectedIndex === index}
             isListView={isListView}
+            autoCheck={autoCheck}
             selectedInListView={selectedInListView}
             highlighted={
               cellData.clues?.[orientation as Orientation] ===
