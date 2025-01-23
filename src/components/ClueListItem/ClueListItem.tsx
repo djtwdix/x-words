@@ -23,7 +23,6 @@ export const ClueListItem = ({
   let className = "clueListItem";
   if (selected) className += " selected";
 
-  console.log("orientation: ", orientation);
   const clueNumber = Number(clue[0]);
 
   const { puzzleInfo } = usePuzzleContext();
