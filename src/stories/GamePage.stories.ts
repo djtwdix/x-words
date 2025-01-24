@@ -1,5 +1,6 @@
 import { GamePage } from "../pages/GamePage/GamePage";
 import { puzzleData } from "../puzzleData";
+import "../index.css";
 
 const meta = {
   title: "Pages/Crossword",

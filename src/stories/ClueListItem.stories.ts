@@ -1,5 +1,6 @@
 import { ClueListItem } from "../components/ClueListItem/ClueListItem";
 import { puzzleData } from "../puzzleData";
+import "../index.css";
 
 const meta = {
   title: "Components/ClueListItem",

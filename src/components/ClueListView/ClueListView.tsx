@@ -4,6 +4,7 @@ import "./ClueListView.css";
 
 export const ClueListView = () => {
   const { puzzleInfo } = usePuzzleContext();
+
   return (
     <div>
       <ClueList

@@ -1,5 +1,6 @@
 import { Clue } from "../components/Clue/Clue";
 import { puzzleData } from "../puzzleData";
+import "../index.css";
 
 const meta = {
   title: "Components/Clue",
