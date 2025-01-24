@@ -31,6 +31,7 @@ export const PuzzleGrid = ({
     changeOrientation,
     listView,
     autoCheck,
+    arrowNavIndex,
   } = usePuzzleContext();
 
   const handleCellClick = (index: number, clickCount: number) => {
@@ -41,7 +42,7 @@ export const PuzzleGrid = ({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const alpha = "abcdefghifklmnopqrstuvwxyz".split("");
-    puzzleGrid.map((cellData, index) => {
+    puzzleGrid.forEach((cellData, index) => {
       if (index !== selectedIndex) return;
 
       //if alphabet key is pressed set it as guess for the cell
@@ -78,7 +79,8 @@ export const PuzzleGrid = ({
             );
           break;
         case "ArrowDown":
-          setSelectedIndex(selectedIndex + size);
+          if (selectedIndex + size < puzzleGrid.length - 1)
+            setSelectedIndex(selectedIndex + size);
           break;
         case "ArrowUp":
           setSelectedIndex(selectedIndex - size);
@@ -104,11 +106,6 @@ export const PuzzleGrid = ({
       if (orientation === "down") setSelectedIndex(selectedIndex + size);
     }
 
-    //if you reach the end of a column, stop navigating
-    if (selectedIndex > puzzleGrid.length - 1) {
-      setSelectedIndex(selectedIndex - size);
-    }
-
     if (!listView) {
       setSelectedClueNumber(
         puzzleGrid[selectedIndex]?.clues?.[orientation as Orientation]
@@ -117,6 +114,10 @@ export const PuzzleGrid = ({
 
     return () => {};
   }, [puzzleGrid, selectedIndex, orientation]);
+
+  useEffect(() => {
+    arrowNavIndex !== undefined && setSelectedIndex(arrowNavIndex);
+  }, [arrowNavIndex]);
 
   return (
     <div

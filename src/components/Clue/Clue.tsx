@@ -1,3 +1,4 @@
+import { usePuzzleContext } from "../../contexts/PuzzleContext";
 import "./Clue.css";
 
 export interface ClueProps {
@@ -5,11 +6,23 @@ export interface ClueProps {
 }
 
 export const Clue = ({ clue }: ClueProps) => {
+  const { handleArrowNav } = usePuzzleContext();
+
   return (
     <div className="clue">
-      <span className="material-icons icon">arrow_back_ios</span>
+      <span
+        onClick={() => handleArrowNav("back")}
+        className="material-icons icon"
+      >
+        arrow_back_ios
+      </span>
       <h4>{clue}</h4>
-      <span className="material-icons icon">arrow_forward_ios</span>
+      <span
+        onClick={() => handleArrowNav("forward")}
+        className="material-icons icon"
+      >
+        arrow_forward_ios
+      </span>
     </div>
   );
 };
