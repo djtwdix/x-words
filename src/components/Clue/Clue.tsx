@@ -7,9 +7,9 @@ export interface ClueProps {
 export const Clue = ({ clue }: ClueProps) => {
   return (
     <div className="clue">
-      <h4>{"<"}</h4>
+      <span className="material-icons icon">arrow_back_ios</span>
       <h4>{clue}</h4>
-      <h4>{">"}</h4>
+      <span className="material-icons icon">arrow_forward_ios</span>
     </div>
   );
 };
