@@ -10,15 +10,11 @@ export interface ClueListItemProps {
   orientation: Orientation;
 }
 
-export const ClueListItem = ({
-  index,
-  clue,
-  autoCheck,
-  orientation,
-}: ClueListItemProps) => {
+export const ClueListItem = ({ clue, orientation }: ClueListItemProps) => {
   const { selectedListViewClue, setSelectedListViewClue } = usePuzzleContext();
   let className = "clueListItem";
   if (clue === selectedListViewClue) className += " selected";
+  console.log("clue: ", clue);
 
   const clueNumber = Number(clue[0]);
 
@@ -39,8 +35,6 @@ export const ClueListItem = ({
         <PuzzleGrid
           letterGrid={letterGrid}
           size={letterGrid.length}
-          autoCheck={autoCheck}
-          isListView={true}
           selectedInListView={clue === selectedListViewClue}
         />
       }

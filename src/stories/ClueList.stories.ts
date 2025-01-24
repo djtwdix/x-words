@@ -14,6 +14,7 @@ export const Across = {
     clues: puzzleData.clues.across,
     answers: puzzleData.answers.across,
     orientation: "across",
+    listView: true,
   },
 };
 
@@ -22,5 +23,6 @@ export const Down = {
     clues: puzzleData.clues.down,
     answers: puzzleData.answers.down,
     orientation: "down",
+    listView: true,
   },
 };

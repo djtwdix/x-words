@@ -1,6 +1,7 @@
 import {
   createContext,
   Dispatch,
+  ReactNode,
   SetStateAction,
   useContext,
   useEffect,
@@ -33,23 +34,35 @@ export interface PuzzleContextType {
   handleArrowNav: (dir: string) => void;
   arrowNavIndex: number | undefined;
 }
+interface PuzzleProviderType {
+  children: ReactNode;
+  puzzleData: PuzzleData;
+  overrides: Partial<PuzzleContextType>;
+}
 
-export const PuzzleProvider = ({ children, puzzleData }: any) => {
+export const PuzzleProvider = ({
+  children,
+  puzzleData,
+  overrides,
+}: PuzzleProviderType) => {
   const [puzzleInfo, setPuzzleInfo] = useState(puzzleData);
   const [selectedClue, setSelectedClue] = useState("");
   const [selectedClueNumber, setSelectedClueNumber] = useState<
     number | undefined
   >(0);
-  const [selectedListViewClue, setSelectedListViewClue] = useState("");
+  const [selectedListViewClue, setSelectedListViewClue] = useState(
+    overrides.selectedListViewClue || ""
+  );
   const [orientation, setOrientation] = useState("across" as Orientation);
-  const [listView, setListView] = useState(false);
-  const [autoCheck, setAutoCheck] = useState(false);
-  const [pencil, setPencil] = useState(false);
+  const [listView, setListView] = useState(overrides.listView || false);
+  const [autoCheck, setAutoCheck] = useState(overrides.autoCheck || false);
+  const [pencil, setPencil] = useState(overrides.pencil || false);
   const [arrowNavIndex, setArrowNavIndex] = useState<undefined | number>(
     undefined
   );
 
   useEffect(() => {
+    //when selected clue number changes we update the selectedClue
     puzzleData.clues[orientation].forEach((clue: string) => {
       if (Number(clue[0]) === selectedClueNumber) setSelectedClue(clue);
     });
@@ -63,7 +76,11 @@ export const PuzzleProvider = ({ children, puzzleData }: any) => {
   const handleArrowNav = (dir: string) => {
     if (!selectedClueNumber) return;
     puzzleInfo.clues[orientation].forEach((clue: string, index: number) => {
+      //value to check the next or previous clue in the array
+      // depending on which arrow was hit - "forward" or "backward"
       const indexAdjust = dir === "forward" ? -1 : 1;
+
+      //if outside the bounds of the array return
       if (
         index + indexAdjust < 0 ||
         index + indexAdjust > puzzleInfo.clues[orientation].length - 1
@@ -71,13 +88,14 @@ export const PuzzleProvider = ({ children, puzzleData }: any) => {
         return;
       }
 
+      //next or previous clue number in the array
       const clueNumberAtAdjustedIndex = Number(
         puzzleInfo.clues[orientation][index + indexAdjust][0]
       );
 
       const clueNumberAtCurrentIndex = Number(clue[0]);
 
-      //check whether the next or previous clueNumber in the array is equal to selectedClueNumber
+      //check whether the next or previous clue number in the array is equal to selectedClueNumber
       //if it is that means the clue at current index is the one we want to navigate to
       if (clueNumberAtAdjustedIndex === selectedClueNumber) {
         puzzleInfo.grid.forEach((letterObj: PuzzleCellData, index: number) => {

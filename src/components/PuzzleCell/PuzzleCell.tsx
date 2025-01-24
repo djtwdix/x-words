@@ -9,9 +9,7 @@ export interface PuzzleCellProps {
   answer?: string | null;
   blank?: boolean;
   clueNumber?: number;
-  autoCheck?: boolean;
   index: number;
-  isListView?: boolean | undefined;
   selectedInListView?: boolean | undefined;
 }
 
@@ -23,18 +21,16 @@ export const PuzzleCell = ({
   answer,
   highlighted,
   clueNumber,
-  autoCheck,
-  isListView,
   selectedInListView,
   blank,
 }: PuzzleCellProps) => {
   let className = "cell";
-  const { pencil } = usePuzzleContext();
+  const { pencil, autoCheck, listView } = usePuzzleContext();
 
-  if (highlighted && !isListView) className += " highlighted";
+  if (highlighted && !listView) className += " highlighted";
   if (selected) {
     //if in listview but the item is not selected we don't want squares to select
-    className += isListView
+    className += listView
       ? selectedInListView
         ? " selected"
         : ""
@@ -42,7 +38,7 @@ export const PuzzleCell = ({
   }
   if (autoCheck && guess === answer) className += " autoCheckCorrect";
   if (blank) className += " blank";
-  if (isListView) className += " inListView";
+  if (listView) className += " inListView";
   if (pencil) className += " pencil";
 
   const autoCheckWrong = autoCheck && guess && guess !== answer;
@@ -54,7 +50,7 @@ export const PuzzleCell = ({
         handleCellClick(index, e.detail);
       }}
     >
-      {!isListView && <h6 className="clueNumber">{clueNumber}</h6>}
+      {!listView && <h6 className="clueNumber">{clueNumber}</h6>}
       <h2 className="guess">{guess}</h2>
       {autoCheckWrong && <div className="autoCheckWrong"></div>}
     </div>

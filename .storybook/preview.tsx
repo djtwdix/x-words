@@ -4,9 +4,15 @@ import React from "react";
 import { puzzleData } from "../src/puzzleData";
 
 const preview: Preview = {
-  decorators: (Story) => {
+  decorators: (Story, context) => {
+    const overrides = {
+      autoCheck: context.args.autoCheck,
+      pencil: context.args.pencil,
+      listView: context.args.listView,
+      selectedListViewClue: context.args.selectedListViewClue,
+    };
     return (
-      <PuzzleProvider puzzleData={puzzleData}>
+      <PuzzleProvider puzzleData={puzzleData} overrides={overrides}>
         <Story />
       </PuzzleProvider>
     );
