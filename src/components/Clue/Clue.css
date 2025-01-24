@@ -1,9 +1,14 @@
 .clue {
-  background-color: rgb(62, 129, 253);
+  background-color: rgb(106, 158, 255);
   width: 377px;
   border: 2px solid gray;
   text-align: center;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.clue > span {
+  color: rgb(44, 44, 44);
 }
