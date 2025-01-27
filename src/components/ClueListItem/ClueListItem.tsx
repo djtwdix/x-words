@@ -14,7 +14,6 @@ export const ClueListItem = ({ clue, orientation }: ClueListItemProps) => {
   const { selectedListViewClue, setSelectedListViewClue } = usePuzzleContext();
   let className = "clueListItem";
   if (clue === selectedListViewClue) className += " selected";
-  console.log("clue: ", clue);
 
   const clueNumber = Number(clue[0]);
 

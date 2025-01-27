@@ -20,6 +20,8 @@ export const PuzzleGrid = ({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [puzzleGrid, setPuzzleGrid] = useState(letterGrid);
   const gridRef = useRef<HTMLDivElement>(null);
+  const isLastColumn = (selectedIndex + 1) % size === 0;
+  const isFirstColumn = selectedIndex % size === 0;
 
   const {
     setSelectedClueNumber,
@@ -36,63 +38,62 @@ export const PuzzleGrid = ({
     if (clickCount > 1) changeOrientation();
   };
 
+  const navToNextCell = () => {
+    const newIndex =
+      orientation === "down" ? selectedIndex + size : selectedIndex + 1;
+
+    if (newIndex <= puzzleGrid.length - 1 && puzzleGrid[selectedIndex].answer)
+      setSelectedIndex(newIndex);
+
+    if (newIndex > puzzleGrid.length - 1 && !listView) {
+      setSelectedIndex(selectedIndex - (puzzleGrid.length - 1));
+    }
+  };
+
+  const navToPrevCell = () => {
+    orientation === "across" || (listView && !isFirstColumn)
+      ? setSelectedIndex(selectedIndex - 1)
+      : setSelectedIndex(selectedIndex - size);
+  };
+
+  const updateCellGuess = (guess: string) => {
+    const updatedGrid = [...puzzleGrid];
+    updatedGrid[selectedIndex].guess = guess.toUpperCase();
+    setPuzzleGrid(updatedGrid);
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const alpha = "abcdefghifklmnopqrstuvwxyz".split("");
-    const isLastColumn = (selectedIndex + 1) % size === 0;
-    const isFirstColumn = selectedIndex % size === 0;
 
-    puzzleGrid.forEach((cellData, index) => {
-      if (index !== selectedIndex) return;
+    if (alpha.includes(e.key)) {
+      updateCellGuess(e.key);
+      navToNextCell();
+    }
 
-      //if alphabet key is pressed set it as guess for the cell
-      if (alpha.includes(e.key)) {
-        cellData.guess = e.key.toUpperCase();
-
-        //after you make a guess we want to navigate to the next cell
-        //add 1 if orientation is down and add size (start of next row) if it's across
-        const newIndex =
-          orientation === "down" ? selectedIndex + size : selectedIndex + 1;
-
-        if (newIndex <= letterGrid.length - 1) setSelectedIndex(newIndex);
-
-        if (newIndex > puzzleGrid.length - 1 && !listView) {
-          setSelectedIndex(selectedIndex - (puzzleGrid.length - 1));
-        }
-      }
-
-      //handle arrow navigation, delete and enter
-      switch (e.key) {
-        case "Backspace":
-          if (!isFirstColumn)
-            orientation === "across" || listView
-              ? setSelectedIndex(selectedIndex - 1)
-              : setSelectedIndex(selectedIndex - size);
-
-          cellData.guess = "";
-          break;
-        case "ArrowLeft":
-          if (!isFirstColumn) setSelectedIndex(selectedIndex - 1);
-          break;
-        case "ArrowRight":
-          if (!isLastColumn)
-            setSelectedIndex(
-              Math.min(selectedIndex + 1, puzzleGrid.length - 1)
-            );
-          break;
-        case "ArrowDown":
-          if (selectedIndex + size <= puzzleGrid.length - 1)
-            setSelectedIndex(selectedIndex + size);
-          break;
-        case "ArrowUp":
-          setSelectedIndex(selectedIndex - size);
-          break;
-        case "Enter":
-          changeOrientation();
-          break;
-      }
-    });
-
-    setPuzzleGrid([...puzzleGrid]);
+    //handle arrow navigation, delete and enter
+    switch (e.key) {
+      case "Backspace":
+        updateCellGuess("");
+        navToPrevCell();
+        break;
+      case "ArrowLeft":
+        if (!isFirstColumn) setSelectedIndex(selectedIndex - 1);
+        break;
+      case "ArrowRight":
+        if (!isLastColumn)
+          setSelectedIndex(Math.min(selectedIndex + 1, puzzleGrid.length - 1));
+        break;
+      case "ArrowDown":
+        if (selectedIndex + size <= puzzleGrid.length - 1)
+          setSelectedIndex(selectedIndex + size);
+        break;
+      case "ArrowUp":
+        if (selectedIndex - size >= 0) setSelectedIndex(selectedIndex - size);
+        break;
+      case "Enter":
+        changeOrientation();
+        break;
+    }
   };
 
   useEffect(() => {
