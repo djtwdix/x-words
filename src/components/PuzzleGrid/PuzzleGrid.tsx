@@ -38,12 +38,18 @@ export const PuzzleGrid = ({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const alpha = "abcdefghifklmnopqrstuvwxyz".split("");
+    const isLastColumn = (selectedIndex + 1) % size === 0;
+    const isFirstColumn = selectedIndex % size === 0;
+
     puzzleGrid.forEach((cellData, index) => {
       if (index !== selectedIndex) return;
 
       //if alphabet key is pressed set it as guess for the cell
       if (alpha.includes(e.key)) {
         cellData.guess = e.key.toUpperCase();
+
+        //after you make a guess we want to navigate to the next cell
+        //add 1 if orientation is down and add size (start of next row) if it's across
         const newIndex =
           orientation === "down" ? selectedIndex + size : selectedIndex + 1;
 
@@ -57,25 +63,24 @@ export const PuzzleGrid = ({
       //handle arrow navigation, delete and enter
       switch (e.key) {
         case "Backspace":
-          orientation === "across"
-            ? setSelectedIndex(selectedIndex - 1)
-            : setSelectedIndex(selectedIndex - size);
+          if (!isFirstColumn)
+            orientation === "across" || listView
+              ? setSelectedIndex(selectedIndex - 1)
+              : setSelectedIndex(selectedIndex - size);
 
           cellData.guess = "";
           break;
         case "ArrowLeft":
-          const isFirstColumn = selectedIndex % size === 0;
           if (!isFirstColumn) setSelectedIndex(selectedIndex - 1);
           break;
         case "ArrowRight":
-          const isLastColumn = (selectedIndex + 1) % size === 0;
           if (!isLastColumn)
             setSelectedIndex(
               Math.min(selectedIndex + 1, puzzleGrid.length - 1)
             );
           break;
         case "ArrowDown":
-          if (selectedIndex + size < puzzleGrid.length - 1)
+          if (selectedIndex + size <= puzzleGrid.length - 1)
             setSelectedIndex(selectedIndex + size);
           break;
         case "ArrowUp":
