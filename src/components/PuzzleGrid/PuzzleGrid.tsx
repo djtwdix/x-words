@@ -31,6 +31,7 @@ export const PuzzleGrid = ({
     listView,
     arrowNavIndex,
     pencil,
+    autoCheck,
   } = usePuzzleContext();
 
   const handleCellClick = (index: number, clickCount: number) => {
@@ -46,15 +47,17 @@ export const PuzzleGrid = ({
     if (newIndex <= puzzleGrid.length - 1 && puzzleGrid[selectedIndex].answer)
       setSelectedIndex(newIndex);
 
-    if (newIndex > puzzleGrid.length - 1 && !listView) {
+    if (newIndex >= puzzleGrid.length - 1 && !listView) {
       setSelectedIndex(selectedIndex - (puzzleGrid.length - 1));
     }
   };
 
   const updateCellGuess = (guess: string) => {
     const updatedGrid = [...puzzleGrid];
-    updatedGrid[selectedIndex].guess = guess.toUpperCase();
-    updatedGrid[selectedIndex].penciled = pencil;
+    const selectedCell = updatedGrid[selectedIndex];
+    selectedCell.guess = guess.toUpperCase();
+    selectedCell.penciled = pencil;
+    selectedCell.autoChecked = autoCheck;
     setPuzzleGrid(updatedGrid);
   };
 
@@ -78,8 +81,7 @@ export const PuzzleGrid = ({
         if (!isFirstColumn) setSelectedIndex(selectedIndex - 1);
         break;
       case "ArrowRight":
-        if (!isLastColumn)
-          setSelectedIndex(Math.min(selectedIndex + 1, puzzleGrid.length - 1));
+        if (!isLastColumn) setSelectedIndex(selectedIndex + 1);
         break;
       case "ArrowDown":
         if (selectedIndex + size <= puzzleGrid.length - 1)
@@ -138,6 +140,7 @@ export const PuzzleGrid = ({
             answer={cellData.answer}
             blank={!cellData.answer}
             penciled={cellData.penciled}
+            autoChecked={cellData.autoChecked}
             selected={selectedIndex === index}
             selectedInListView={selectedInListView}
             highlighted={

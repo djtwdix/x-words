@@ -23,6 +23,7 @@ export interface PuzzleCellData {
     down: number;
   };
   penciled?: boolean;
+  autoChecked?: boolean;
 }
 
 export const puzzleData: PuzzleData = {
