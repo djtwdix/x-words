@@ -30,6 +30,7 @@ export const PuzzleGrid = ({
     changeOrientation,
     listView,
     arrowNavIndex,
+    pencil,
   } = usePuzzleContext();
 
   const handleCellClick = (index: number, clickCount: number) => {
@@ -50,15 +51,10 @@ export const PuzzleGrid = ({
     }
   };
 
-  const navToPrevCell = () => {
-    orientation === "across" || (listView && !isFirstColumn)
-      ? setSelectedIndex(selectedIndex - 1)
-      : setSelectedIndex(selectedIndex - size);
-  };
-
   const updateCellGuess = (guess: string) => {
     const updatedGrid = [...puzzleGrid];
     updatedGrid[selectedIndex].guess = guess.toUpperCase();
+    updatedGrid[selectedIndex].penciled = pencil;
     setPuzzleGrid(updatedGrid);
   };
 
@@ -74,7 +70,9 @@ export const PuzzleGrid = ({
     switch (e.key) {
       case "Backspace":
         updateCellGuess("");
-        navToPrevCell();
+        orientation === "across"
+          ? setSelectedIndex(selectedIndex - 1)
+          : setSelectedIndex(selectedIndex - size);
         break;
       case "ArrowLeft":
         if (!isFirstColumn) setSelectedIndex(selectedIndex - 1);
@@ -139,6 +137,7 @@ export const PuzzleGrid = ({
             clueNumber={cellData.clueNumber}
             answer={cellData.answer}
             blank={!cellData.answer}
+            penciled={cellData.penciled}
             selected={selectedIndex === index}
             selectedInListView={selectedInListView}
             highlighted={

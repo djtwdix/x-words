@@ -22,6 +22,7 @@ export interface PuzzleCellData {
     across: number;
     down: number;
   };
+  penciled?: boolean;
 }
 
 export const puzzleData: PuzzleData = {

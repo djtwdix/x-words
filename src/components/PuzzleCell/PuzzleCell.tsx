@@ -8,6 +8,7 @@ export interface PuzzleCellProps {
   guess?: string;
   answer?: string | null;
   blank?: boolean;
+  penciled: boolean | undefined;
   clueNumber?: number;
   index: number;
   selectedInListView?: boolean | undefined;
@@ -20,12 +21,13 @@ export const PuzzleCell = ({
   guess,
   answer,
   highlighted,
+  penciled,
   clueNumber,
   selectedInListView,
   blank,
 }: PuzzleCellProps) => {
   let className = "cell";
-  const { pencil, autoCheck, listView } = usePuzzleContext();
+  const { autoCheck, listView } = usePuzzleContext();
 
   if (highlighted && !listView) className += " highlighted";
   if (selected) {
@@ -39,7 +41,7 @@ export const PuzzleCell = ({
   if (autoCheck && guess === answer) className += " autoCheckCorrect";
   if (blank) className += " blank";
   if (listView) className += " inListView";
-  if (pencil) className += " pencil";
+  if (penciled) className += " pencil";
 
   const autoCheckWrong = autoCheck && guess && guess !== answer;
 
