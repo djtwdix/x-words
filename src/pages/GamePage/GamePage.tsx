@@ -23,7 +23,6 @@ export const GamePage = ({ puzzleData }: GamePageProps) => {
         <>
           <PuzzleGrid
             letterGrid={puzzleInfo.grid}
-            autoCheck={false}
             size={puzzleInfo.size.cols}
           />
           <Clue clue={selectedClue} />
