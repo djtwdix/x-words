@@ -76,11 +76,11 @@ export const PuzzleProvider = ({
   const handleArrowNav = (dir: string) => {
     if (!selectedClueNumber) return;
     puzzleInfo.clues[orientation].forEach((clue: string, index: number) => {
-      //value to check the next or previous clue in the array
-      // depending on which arrow was hit - "forward" or "backward"
-      const indexAdjust = dir === "forward" ? -1 : 1;
+      const clueNumberAtCurrentIndex = Number(clue[0]);
 
-      //if outside the bounds of the array return
+      const indexAdjust = dir === "forward" ? 1 : -1;
+
+      //if there is no next or previous clue return
       if (
         index + indexAdjust < 0 ||
         index + indexAdjust > puzzleInfo.clues[orientation].length - 1
@@ -88,22 +88,17 @@ export const PuzzleProvider = ({
         return;
       }
 
-      //next or previous clue number in the array
-      const clueNumberAtAdjustedIndex = Number(
-        puzzleInfo.clues[orientation][index + indexAdjust][0]
-      );
+      if (clueNumberAtCurrentIndex === selectedClueNumber) {
+        const clueNumberToNavTo = Number(
+          puzzleInfo.clues[orientation][index + indexAdjust][0]
+        );
 
-      const clueNumberAtCurrentIndex = Number(clue[0]);
-
-      //check whether the next or previous clue number in the array is equal to selectedClueNumber
-      //if it is that means the clue at current index is the one we want to navigate to
-      if (clueNumberAtAdjustedIndex === selectedClueNumber) {
         puzzleInfo.grid.forEach((letterObj: PuzzleCellData, index: number) => {
-          if (letterObj.clueNumber === clueNumberAtCurrentIndex) {
+          if (letterObj.clueNumber === clueNumberToNavTo) {
             setArrowNavIndex(index);
           }
         });
-        setSelectedClueNumber(clueNumberAtCurrentIndex);
+        setSelectedClueNumber(clueNumberToNavTo);
       }
     });
   };
