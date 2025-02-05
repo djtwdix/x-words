@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import { PuzzleProvider } from "../src/contexts/PuzzleContext";
 import React from "react";
-import { puzzleData } from "../src/puzzleData";
+import { puzzleDataTwo } from "../src/puzzleData";
 
 const preview: Preview = {
   decorators: (Story, context) => {
@@ -12,7 +12,7 @@ const preview: Preview = {
       selectedListViewClue: context.args.selectedListViewClue,
     };
     return (
-      <PuzzleProvider puzzleData={puzzleData} overrides={overrides}>
+      <PuzzleProvider puzzleData={puzzleDataTwo} overrides={overrides}>
         <Story />
       </PuzzleProvider>
     );

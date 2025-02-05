@@ -24,6 +24,7 @@ export interface PuzzleCellData {
   };
   penciled?: boolean;
   autoChecked?: boolean;
+  gridIndex?: number;
 }
 
 export const puzzleData: PuzzleData = {
@@ -227,6 +228,199 @@ export const puzzleData: PuzzleData = {
         across: 9,
         down: 6,
       },
+    },
+  ],
+  size: { rows: 5, cols: 5 },
+};
+
+export const puzzleDataTwo: PuzzleData = {
+  clues: {
+    across: [
+      "1. T-shirt or blouse",
+      "4. Do a novelist's job",
+      "6. Confusing answer to 'So I'm supposed to turn left?'",
+      "7. French 'To Be'",
+      "8. ____-do-well",
+    ],
+    down: [
+      "1. Fearsome cat, in Spanish",
+      "2. Alternative option",
+      "3. Marcel the monkey, on 'Friends'",
+      "4. Tiny bird with a piercing 'teakettle-teakettle!' Song",
+      "5. Religious ceremony",
+    ],
+  },
+  answers: {
+    across: ["Top", "Write", "Right", "Etre", "Neer"],
+    down: ["Tigre", "Other", "Pet", "Wren", "Rite"],
+  },
+  grid: [
+    {
+      answer: null,
+    },
+    {
+      answer: null,
+    },
+    {
+      answer: "T",
+      clueNumber: 1,
+      clues: {
+        across: 1,
+        down: 1,
+      },
+    },
+    {
+      answer: "O",
+      clueNumber: 2,
+      clues: {
+        across: 1,
+        down: 2,
+      },
+    },
+    {
+      answer: "P",
+      clueNumber: 3,
+      clues: {
+        across: 1,
+        down: 3,
+      },
+    },
+    {
+      answer: "W",
+      clueNumber: 4,
+      clues: {
+        across: 4,
+        down: 4,
+      },
+    },
+    {
+      answer: "R",
+      clueNumber: 5,
+      clues: {
+        across: 4,
+        down: 5,
+      },
+    },
+    {
+      answer: "I",
+      clues: {
+        across: 4,
+        down: 1,
+      },
+    },
+    {
+      answer: "T",
+      clues: {
+        across: 4,
+        down: 2,
+      },
+    },
+    {
+      answer: "E",
+      clues: {
+        across: 4,
+        down: 3,
+      },
+    },
+    {
+      answer: "R",
+      clueNumber: 6,
+      clues: {
+        across: 6,
+        down: 4,
+      },
+    },
+    {
+      answer: "I",
+      clues: {
+        across: 6,
+        down: 5,
+      },
+    },
+    {
+      answer: "G",
+      clues: {
+        across: 6,
+        down: 1,
+      },
+    },
+    {
+      answer: "H",
+      clues: {
+        across: 6,
+        down: 2,
+      },
+    },
+    {
+      answer: "T",
+      clues: {
+        across: 6,
+        down: 3,
+      },
+    },
+    {
+      answer: "E",
+      clueNumber: 7,
+      clues: {
+        across: 7,
+        down: 4,
+      },
+    },
+    {
+      answer: "T",
+      clues: {
+        across: 7,
+        down: 5,
+      },
+    },
+    {
+      answer: "R",
+      clues: {
+        across: 7,
+        down: 1,
+      },
+    },
+    {
+      answer: "E",
+      clues: {
+        across: 7,
+        down: 2,
+      },
+    },
+    {
+      answer: null,
+    },
+    {
+      answer: "N",
+      clueNumber: 8,
+      clues: {
+        across: 8,
+        down: 4,
+      },
+    },
+    {
+      answer: "E",
+      clues: {
+        across: 8,
+        down: 5,
+      },
+    },
+    {
+      answer: "E",
+      clues: {
+        across: 8,
+        down: 1,
+      },
+    },
+    {
+      answer: "R",
+      clues: {
+        across: 8,
+        down: 2,
+      },
+    },
+    {
+      answer: null,
     },
   ],
   size: { rows: 5, cols: 5 },
