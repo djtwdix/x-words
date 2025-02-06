@@ -68,6 +68,18 @@ export const PuzzleProvider = ({
     });
   }, [selectedClueNumber, orientation]);
 
+  useEffect(() => {
+    if (autoCheck) {
+      const newGrid = puzzleInfo.grid.map((cell) => {
+        if (cell.guess) {
+          return { ...cell, autoChecked: true };
+        }
+        return cell;
+      });
+      setPuzzleInfo({ ...puzzleInfo, grid: newGrid });
+    }
+  }, [autoCheck]);
+
   //helper function that flips the orientation state
   const changeOrientation = () => {
     setOrientation((prev) => (prev === "across" ? "down" : "across"));
