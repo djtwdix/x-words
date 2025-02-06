@@ -18,7 +18,6 @@ export const PuzzleGrid = ({
   selectedInListView,
 }: PuzzleGridProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [puzzleGrid, setPuzzleGrid] = useState(letterGrid);
   const gridRef = useRef<HTMLDivElement>(null);
   const isLastColumn = (selectedIndex + 1) % size === 0;
   const isFirstColumn = selectedIndex % size === 0;
@@ -32,6 +31,7 @@ export const PuzzleGrid = ({
     arrowNavIndex,
     pencil,
     autoCheck,
+    setPuzzleInfo,
   } = usePuzzleContext();
 
   const handleCellClick = (index: number, clickCount: number) => {
@@ -44,21 +44,23 @@ export const PuzzleGrid = ({
     const newIndex =
       orientation === "down" ? selectedIndex + size : selectedIndex + 1;
 
-    if (newIndex <= puzzleGrid.length - 1 && puzzleGrid[selectedIndex].answer)
+    if (newIndex <= letterGrid.length - 1 && letterGrid[selectedIndex].answer)
       setSelectedIndex(newIndex);
 
-    if (newIndex >= puzzleGrid.length - 1 && !listView) {
-      setSelectedIndex(selectedIndex - (puzzleGrid.length - 1));
+    if (newIndex >= letterGrid.length - 1 && !listView) {
+      setSelectedIndex(selectedIndex - (letterGrid.length - 1));
     }
   };
 
   const updateCellGuess = (guess: string) => {
-    const updatedGrid = [...puzzleGrid];
+    const updatedGrid = [...letterGrid];
     const selectedCell = updatedGrid[selectedIndex];
     selectedCell.guess = guess.toUpperCase();
     selectedCell.penciled = pencil;
     selectedCell.autoChecked = autoCheck;
-    setPuzzleGrid(updatedGrid);
+    setPuzzleInfo((prev) => {
+      return { ...prev, grid: updatedGrid };
+    });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -78,24 +80,24 @@ export const PuzzleGrid = ({
           : setSelectedIndex(selectedIndex - size);
         break;
       case "ArrowLeft":
-        if (!isFirstColumn && puzzleGrid[selectedIndex - 1].answer)
+        if (!isFirstColumn && letterGrid[selectedIndex - 1].answer)
           setSelectedIndex(selectedIndex - 1);
         break;
       case "ArrowRight":
-        if (!isLastColumn && puzzleGrid[selectedIndex + 1].answer)
+        if (!isLastColumn && letterGrid[selectedIndex + 1].answer)
           setSelectedIndex(selectedIndex + 1);
         break;
       case "ArrowDown":
         if (
-          selectedIndex + size <= puzzleGrid.length - 1 &&
-          puzzleGrid[selectedIndex + size].answer
+          selectedIndex + size <= letterGrid.length - 1 &&
+          letterGrid[selectedIndex + size].answer
         )
           setSelectedIndex(selectedIndex + size);
         break;
       case "ArrowUp":
         if (
           selectedIndex - size >= 0 &&
-          puzzleGrid[selectedIndex - size].answer
+          letterGrid[selectedIndex - size].answer
         )
           setSelectedIndex(selectedIndex - size);
         break;
@@ -109,8 +111,8 @@ export const PuzzleGrid = ({
     gridRef.current?.focus();
     //if selected cell is blank move to the next one
     if (
-      !puzzleGrid[selectedIndex]?.answer &&
-      selectedIndex < puzzleGrid.length - 1
+      !letterGrid[selectedIndex]?.answer &&
+      selectedIndex < letterGrid.length - 1
     ) {
       if (orientation === "across") setSelectedIndex(selectedIndex + 1);
 
@@ -119,12 +121,12 @@ export const PuzzleGrid = ({
 
     if (!listView) {
       setSelectedClueNumber(
-        puzzleGrid[selectedIndex]?.clues?.[orientation as Orientation]
+        letterGrid[selectedIndex]?.clues?.[orientation as Orientation]
       );
     }
 
     return () => {};
-  }, [puzzleGrid, selectedIndex, orientation]);
+  }, [letterGrid, selectedIndex, orientation]);
 
   useEffect(() => {
     arrowNavIndex !== undefined && setSelectedIndex(arrowNavIndex);
@@ -138,7 +140,7 @@ export const PuzzleGrid = ({
       className="puzzleGrid"
       style={{ maxWidth: size * (listView ? 30 : 75) }}
     >
-      {puzzleGrid.map((cellData, index) => {
+      {letterGrid.map((cellData, index) => {
         return (
           <PuzzleCell
             index={cellData.gridIndex}
