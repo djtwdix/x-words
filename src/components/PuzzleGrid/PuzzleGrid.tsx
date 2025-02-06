@@ -42,7 +42,9 @@ export const PuzzleGrid = ({
 
   const navToNextCell = () => {
     const newIndex =
-      orientation === "down" ? selectedIndex + size : selectedIndex + 1;
+      orientation === "across" || listView
+        ? selectedIndex + 1
+        : selectedIndex + size;
 
     if (newIndex <= puzzleGrid.length - 1 && puzzleGrid[selectedIndex].answer)
       setSelectedIndex(newIndex);
@@ -73,8 +75,8 @@ export const PuzzleGrid = ({
     switch (e.key) {
       case "Backspace":
         updateCellGuess("");
-        orientation === "across"
-          ? setSelectedIndex(selectedIndex - 1)
+        orientation === "across" || listView
+          ? setSelectedIndex(Math.max(selectedIndex - 1, 0))
           : setSelectedIndex(selectedIndex - size);
         break;
       case "ArrowLeft":
