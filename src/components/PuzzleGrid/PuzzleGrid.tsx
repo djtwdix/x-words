@@ -78,26 +78,17 @@ export const PuzzleGrid = ({
           : setSelectedIndex(selectedIndex - size);
         break;
       case "ArrowLeft":
-        if (!isFirstColumn && puzzleGrid[selectedIndex - 1].answer)
-          setSelectedIndex(selectedIndex - 1);
+        if (!isFirstColumn) setSelectedIndex(selectedIndex - 1);
         break;
       case "ArrowRight":
-        if (!isLastColumn && puzzleGrid[selectedIndex + 1].answer)
-          setSelectedIndex(selectedIndex + 1);
+        if (!isLastColumn) setSelectedIndex(selectedIndex + 1);
         break;
       case "ArrowDown":
-        if (
-          selectedIndex + size <= puzzleGrid.length - 1 &&
-          puzzleGrid[selectedIndex + size].answer
-        )
+        if (selectedIndex + size <= puzzleGrid.length - 1)
           setSelectedIndex(selectedIndex + size);
         break;
       case "ArrowUp":
-        if (
-          selectedIndex - size >= 0 &&
-          puzzleGrid[selectedIndex - size].answer
-        )
-          setSelectedIndex(selectedIndex - size);
+        if (selectedIndex - size >= 0) setSelectedIndex(selectedIndex - size);
         break;
       case "Enter":
         changeOrientation();
@@ -141,7 +132,7 @@ export const PuzzleGrid = ({
       {puzzleGrid.map((cellData, index) => {
         return (
           <PuzzleCell
-            index={cellData.gridIndex}
+            index={index}
             key={index}
             guess={cellData.guess}
             handleCellClick={handleCellClick}
