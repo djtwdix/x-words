@@ -109,6 +109,9 @@ export const PuzzleGrid = ({
 
   useEffect(() => {
     gridRef.current?.focus();
+  }, [listView, autoCheck, pencil]);
+
+  useEffect(() => {
     //if selected cell is blank move to the next one
     if (
       !letterGrid[selectedIndex]?.answer &&
@@ -119,6 +122,7 @@ export const PuzzleGrid = ({
       if (orientation === "down") setSelectedIndex(selectedIndex + size);
     }
 
+    //set the new clue number
     if (!listView) {
       setSelectedClueNumber(
         letterGrid[selectedIndex]?.clues?.[orientation as Orientation]
