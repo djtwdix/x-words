@@ -143,7 +143,7 @@ export const PuzzleGrid = ({
       {letterGrid.map((cellData, index) => {
         return (
           <PuzzleCell
-            index={cellData.gridIndex}
+            index={index}
             key={index}
             guess={cellData.guess}
             handleCellClick={handleCellClick}
